@@ -1,4 +1,4 @@
-import { Button, makeStyles, TextField, Typography } from "@material-ui/core";
+import { Button, TextField, Typography } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { getCity, getWeather } from "../../httpClient";
 import { IWeatherResponse } from "../../types";
@@ -9,39 +9,9 @@ import {
 import { WeatherIcon, TodaysWeather } from "../../components";
 import Moment from "react-moment";
 import { useHistory } from "react-router-dom";
-import { CurrentDay } from "../../contexts";
+import { CurrentCityContext, CurrentDay } from "../../contexts";
 import { Alert } from "@material-ui/lab";
-
-const useStyles = makeStyles((theme) => ({
-	form: {
-		"& > *": {
-			margin: theme.spacing(1),
-		},
-	},
-
-	paper: {
-		flexWrap: "wrap",
-		"& > *": {
-			margin: theme.spacing(1),
-			padding: theme.spacing(4),
-		},
-		textAlign: "center",
-	},
-
-	iconWrapper: {
-		width: 55,
-		transition: "all 0.4s ease-in-out",
-		margin: "0 auto",
-		display: "flex",
-	},
-	changeBtn: {
-		position: "absolute",
-		top: "50%",
-		right: 0,
-		transform: "translateY(-50%)",
-		borderRadius: 0,
-	},
-}));
+import useStyles from "./styles.home";
 
 export default function Home() {
 	const [weatherData, setWeatherData] = useState<IWeatherResponse | null>(null);
@@ -54,15 +24,18 @@ export default function Home() {
 	const classes = useStyles();
 	const history = useHistory();
 	const { setCurrentDayInfo } = useContext(CurrentDay);
+	const { setCurrentCityInfo } = useContext(CurrentCityContext);
 
 	useEffect(() => {
 		(async () => {
 			try {
 				const res = await getCity(country);
 				if (res.statusText === "OK") {
+					setCurrentCityInfo(res.data);
+
 					const res_weather = await getWeather(res.data.city);
+
 					setWeatherData(res_weather.data);
-					console.log(res_weather.data.daily);
 				}
 			} catch (error) {
 				setError(error.message);
@@ -120,30 +93,11 @@ export default function Home() {
 
 			{weatherData && (
 				<React.Fragment>
-					<div
-						style={{
-							display: "flex",
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<WeatherIcon icon={weatherData.current.weather[0].icon} />
-
-						<div>
-							<strong>
-								{country.city}, {country.country}
-							</strong>
-							<br />
-							<span style={{ color: "#848d95" }}>
-								{weatherData.current.weather[0].description}
-							</span>
-						</div>
-					</div>
-
 					<TodaysWeather
 						current={weatherData.current}
 						daily={weatherData.daily[0]}
 						tzOffset={weatherData.timezone_offset}
+						today
 					/>
 
 					<div

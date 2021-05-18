@@ -8,13 +8,13 @@ interface Props {}
 export default function Details({}: Props): ReactElement {
 	const { currentDayInfo } = useContext(CurrentDay);
 
-	console.log(currentDayInfo);
-
 	return (
 		<div>
 			<Link to="/">Home</Link>
-
-			<TodaysWeather current={currentDayInfo} />
+			<br />
+			<br />
+			<br />
+			<TodaysWeather current={currentDayInfo} today={false} />
 		</div>
 	);
 }

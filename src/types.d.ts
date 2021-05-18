@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface IQueryCity {
 	city: string;
 	country: string;
@@ -8,11 +10,15 @@ export interface IQueryForecast {
 	lon: number;
 }
 
+interface ITemp {
+	day: number;
+}
+
 export interface ICurrentWeather {
 	dt: number;
 	sunrise?: number;
 	sunset?: number;
-	temp: number;
+	temp: any;
 	feels_like: number;
 	pressure: number;
 	humidity: number;
@@ -53,3 +59,8 @@ export interface IWeatherResponse {
 	hourly: CurrentWeather[];
 	daily: Daily[];
 }
+
+export type CurrentCity = {
+	currentCityInfo: any;
+	setCurrentCityInfo: Dispatch<SetStateAction<any>>;
+};
