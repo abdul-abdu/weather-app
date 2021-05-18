@@ -9,7 +9,7 @@ export default function Details({}: Props): ReactElement {
 	const { currentDayInfo } = useContext(CurrentDay);
 
 	return (
-		<div>
+		<div className="home">
 			<Link to="/">Home</Link>
 			<br />
 			<br />

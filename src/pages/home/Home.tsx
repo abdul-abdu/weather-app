@@ -63,7 +63,7 @@ export default function Home() {
 	};
 
 	return (
-		<div className="App">
+		<div className="home">
 			<Typography variant="h4">Weather Forecast</Typography>
 			<br />
 			<form
@@ -114,7 +114,7 @@ export default function Home() {
 								className="day-wheather"
 								onClick={() => onClickDetailsHandler(dayWeather)}
 							>
-								<div>
+								<div style={{ margin: "10px 0" }}>
 									<strong>
 										<Moment unix format="ddd">
 											{dayWeather.dt}

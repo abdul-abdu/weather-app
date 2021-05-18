@@ -80,7 +80,13 @@ export const TodaysWeather = ({
 				</Grid>
 
 				<Grid item xs={12} md={12}>
-					<div style={{ display: "flex", justifyContent: "space-around" }}>
+					<div
+						style={{
+							display: "flex",
+							justifyContent: "space-around",
+							margin: "10px 0",
+						}}
+					>
 						{daily && (
 							<>
 								<div>
