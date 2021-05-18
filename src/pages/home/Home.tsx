@@ -31,6 +31,7 @@ export default function Home() {
 			try {
 				const res = await getCity(country);
 				if (res.statusText === "OK") {
+					setError("");
 					setCurrentCityInfo(res.data);
 
 					const res_weather = await getWeather(res.data.city);
