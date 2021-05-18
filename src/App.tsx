@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { hot } from "react-hot-loader";
+import { CurrentDay } from "./contexts";
+import Pages from "./pages";
+import { ICurrentWeather } from "./types";
 
 const App = () => {
+	const [currentDayInfo, setCurrentDayInfo] = useState<ICurrentWeather>();
 	return (
 		<div className="App">
-			<h1>Weather App</h1>
+			<CurrentDay.Provider value={{ currentDayInfo, setCurrentDayInfo }}>
+				<Pages />
+			</CurrentDay.Provider>
 		</div>
 	);
 };
