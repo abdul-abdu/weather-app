@@ -1,5 +1,4 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { ICurrentWeather } from "../types";
 
 export type Context = {
 	currentDayInfo: any;

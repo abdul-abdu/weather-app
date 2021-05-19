@@ -1,4 +1,10 @@
-import { Button, TextField, Typography } from "@material-ui/core";
+import {
+	Button,
+	Divider,
+	Grid,
+	TextField,
+	Typography,
+} from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { getCity, getWeather } from "../../httpClient";
 import { IWeatherResponse } from "../../types";
@@ -12,6 +18,8 @@ import { useHistory } from "react-router-dom";
 import { CurrentCityContext, CurrentDay } from "../../contexts";
 import { Alert } from "@material-ui/lab";
 import useStyles from "./styles.home";
+import moment from "moment";
+import { HourlyDisplay } from "../../components/HourlyDisplay";
 
 export default function Home() {
 	const [weatherData, setWeatherData] = useState<IWeatherResponse | null>(null);
@@ -24,7 +32,8 @@ export default function Home() {
 	const classes = useStyles();
 	const history = useHistory();
 	const { setCurrentDayInfo } = useContext(CurrentDay);
-	const { setCurrentCityInfo } = useContext(CurrentCityContext);
+	const { setCurrentCityInfo, currentCityInfo } =
+		useContext(CurrentCityContext);
 
 	useEffect(() => {
 		(async () => {
@@ -35,7 +44,6 @@ export default function Home() {
 					setCurrentCityInfo(res.data);
 
 					const res_weather = await getWeather(res.data.city);
-
 					setWeatherData(res_weather.data);
 				}
 			} catch (error) {
@@ -59,7 +67,8 @@ export default function Home() {
 
 	const onClickDetailsHandler = (day: any) => {
 		setCurrentDayInfo(day);
-		history.push(`/${day.dt}`);
+
+		history.push(`/${moment(day.dt * 1000).format("dddd")}`);
 	};
 
 	return (
@@ -101,22 +110,31 @@ export default function Home() {
 						today
 					/>
 
-					<div
+					<br />
+					<br />
+
+					<Typography variant="h5">Weekly</Typography>
+					<Grid
+						container
 						style={{
-							display: "flex",
-							justifyContent: "space-around",
-							marginTop: "20px",
+							margin: "20px 10px",
 						}}
+						justify="center"
 					>
 						{weatherData.daily.slice(1, 6).map((dayWeather, key) => (
-							<div
+							<Grid
+								item
 								key={key}
 								className="day-wheather"
 								onClick={() => onClickDetailsHandler(dayWeather)}
+								lg={2}
+								md={3}
+								sm={4}
+								xs={6}
 							>
 								<div style={{ margin: "10px 0" }}>
 									<strong>
-										<Moment unix format="ddd">
+										<Moment unix format="dddd">
 											{dayWeather.dt}
 										</Moment>
 									</strong>
@@ -152,9 +170,18 @@ export default function Home() {
 										<div>min: {Math.floor(dayWeather.temp.min)}°</div>
 									</div>
 								</div>
-							</div>
+							</Grid>
 						))}
-					</div>
+					</Grid>
+
+					<Divider />
+					<br />
+					<Typography variant="h5">Hourly</Typography>
+					<Grid container justify="center">
+						{currentCityInfo.list.slice(0, 6).map((hourly: any, index: any) => (
+							<HourlyDisplay key={index} dayWeather={hourly} />
+						))}
+					</Grid>
 				</React.Fragment>
 			)}
 		</div>

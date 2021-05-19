@@ -9,6 +9,7 @@ import Moment from "react-moment";
 import GridLayout from "../layouts/GridLayout";
 import { WeatherIcon } from "./WeatherIcon";
 import { CurrentCityContext } from "../contexts";
+import moment from "moment";
 
 interface ITodaysProps {
 	current: ICurrentWeather;
@@ -28,6 +29,7 @@ export const TodaysWeather = ({
 		sunrise,
 		sunset,
 		weather,
+		dt,
 	},
 	daily,
 	today,
@@ -61,7 +63,9 @@ export const TodaysWeather = ({
 
 			<GridLayout>
 				<Grid item xs={12} sm={6} md={6}>
-					<Typography variant="h5">{today ? "Today" : ""}</Typography>
+					<Typography variant="h5">
+						{moment(dt * 1000).format("dddd")}
+					</Typography>
 					<Typography variant="h3">{getOptimizedVal(temp)}°</Typography>
 				</Grid>
 
