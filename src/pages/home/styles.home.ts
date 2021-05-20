@@ -22,13 +22,6 @@ const useStyles = makeStyles((theme) => ({
 		margin: "0 auto",
 		display: "flex",
 	},
-	changeBtn: {
-		position: "absolute",
-		top: "50%",
-		right: 0,
-		transform: "translateY(-50%)",
-		borderRadius: 0,
-	},
 }));
 
 export default useStyles;

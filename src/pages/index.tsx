@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import NotFound from "./home";
+import NotFound from "./notfound";
 import routers from "./routes";
 
 const Pages = () => (
@@ -18,7 +18,6 @@ const Pages = () => (
 					)}
 				/>
 			))}
-
 			<NotFound />
 		</Switch>
 	</React.Fragment>

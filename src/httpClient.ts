@@ -5,7 +5,7 @@ const httpClient = axios.create({
 	baseURL: "https://api.openweathermap.org/",
 });
 
-// Shoul be in .env
+// Should be in .env
 const apiKey = "65aa39627e777b9b50dc8b47b457fb20";
 
 const citiesEndpoint =
