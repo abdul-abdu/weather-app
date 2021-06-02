@@ -1,10 +1,20 @@
-import React from "react";
-import { DefaultLayout } from "../../layouts";
+import { Button, Typography } from '@material-ui/core';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { DefaultLayout } from '../../layouts';
 
-export default function NotFound() {
-	return (
-		<DefaultLayout>
-			<div>Not Found 404</div>
-		</DefaultLayout>
-	);
-}
+const NotFound = (): JSX.Element => {
+    return (
+        <DefaultLayout>
+            <>
+                <Typography variant="h5">Not Found 404</Typography>
+                <br />
+                <Button variant="contained" color="secondary" component={Link} to="/">
+                    Home
+                </Button>
+            </>
+        </DefaultLayout>
+    );
+};
+
+export default NotFound;

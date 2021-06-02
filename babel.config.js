@@ -1,4 +1,10 @@
 module.exports = {
-	presets: ["@babel/preset-env", "@babel/preset-react"],
-	testMatch: ["<rootDir>/src/**/*.test.js", "<rootDir>/src/**/*.test.jsx"],
+    presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+    env: {
+        test: {},
+        prod: {},
+        dev: {
+            plugins: ['react-refresh/babel'],
+        },
+    },
 };
