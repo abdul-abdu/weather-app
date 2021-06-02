@@ -63,9 +63,7 @@ export default function Home(): JSX.Element {
 
     const onClickDetailsHandler = (day: any) => {
         setCurrentDayInfo(day);
-        console.log({ day });
-
-        // history.push(`/${moment(day.dt * 1000).format('dddd')}`);
+        history.push(`/${moment(day.dt * 1000).format('dddd')}`);
     };
 
     return (
