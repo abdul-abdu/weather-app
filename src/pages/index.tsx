@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import NotFound from './notfound';
 import routers from './routes';
 
-const Pages = (): any => (
+const Pages = (): JSX.Element => (
     <React.Fragment>
         <Switch>
             {routers.map((router, index) => (

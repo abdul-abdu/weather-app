@@ -13,7 +13,7 @@ import moment from 'moment';
 import { HourlyDisplay } from '../../components/HourlyDisplay';
 import axios from 'axios';
 
-export default function Home() {
+export default function Home(): JSX.Element {
     const [weatherData, setWeatherData] = useState<IWeatherResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [country, setCountry] = useState({
@@ -63,8 +63,9 @@ export default function Home() {
 
     const onClickDetailsHandler = (day: any) => {
         setCurrentDayInfo(day);
+        console.log({ day });
 
-        history.push(`/${moment(day.dt * 1000).format('dddd')}`);
+        // history.push(`/${moment(day.dt * 1000).format('dddd')}`);
     };
 
     return (
@@ -159,7 +160,7 @@ export default function Home() {
                     <br />
                     <Typography variant="h5">Hourly</Typography>
                     <Grid container justify="center">
-                        {currentCityInfo.list.slice(0, 6).map((hourly: any, index: any) => (
+                        {currentCityInfo.list.slice(0, 6).map((hourly: any, index: number) => (
                             <HourlyDisplay key={index} dayWeather={hourly} />
                         ))}
                     </Grid>

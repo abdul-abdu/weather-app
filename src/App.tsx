@@ -3,12 +3,12 @@ import { CurrentCityContext, CurrentDay } from './contexts';
 import { useScrollToTop } from './hooks';
 import Pages from './pages';
 import { ICurrentWeather } from './types';
+import { hot } from 'react-hot-loader';
 
-const App = () => {
+const App = (): JSX.Element => {
     const [currentDayInfo, setCurrentDayInfo] = useState<ICurrentWeather>();
     const [currentCityInfo, setCurrentCityInfo] = useState<any>();
     useScrollToTop();
-    console.log(3333);
 
     return (
         <div className="App">
@@ -21,4 +21,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default hot(module)(App);
