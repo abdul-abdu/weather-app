@@ -3,10 +3,22 @@ import React, { ReactElement } from 'react';
 import Moment from 'react-moment';
 import { WeatherIcon } from '../components';
 
-const HourlyDisplay = ({ dayWeather }: any): ReactElement => {
+type HourlyProps = {
+    dayWeather: any;
+};
+
+const HourlyDisplay = ({ dayWeather }: HourlyProps): ReactElement => {
     return (
-        <Grid item className="day-wheather" lg={3} md={3} sm={4} xs={6} style={{ marginTop: '15px' }}>
-            <div style={{ margin: '20px 0' }}>
+        <Grid
+            item
+            className="day-wheather"
+            lg={2}
+            md={3}
+            sm={4}
+            xs={6}
+            style={{ margin: '10px 10px 0 10px', padding: '10px 0' }}
+        >
+            <div>
                 <strong>
                     <Moment unix format="h:mm a">
                         {dayWeather.dt}
