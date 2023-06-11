@@ -128,7 +128,7 @@ export default function Home(): JSX.Element {
             style={{
               margin: "20px 10px",
             }}
-            justify="center"
+            justifyContent="center"
           >
             {weatherData.daily.slice(1, 6).map((dayWeather, key) => (
               <Grid
@@ -186,7 +186,7 @@ export default function Home(): JSX.Element {
           <Divider />
           <br />
           <Typography variant="h5">Hourly</Typography>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             {currentCityInfo?.list
               .slice(0, 6)
               ?.map((hourly: any, index: number) => (
